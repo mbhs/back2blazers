@@ -16,6 +16,7 @@ export function Header(){
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
             <Link href="/" aria-label="Home Button" className="hover:opacity-80 transition-opacity flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/blazer.png" alt="Logo" className="max-w-14 py-2"/>
               <p className="font-semibold text-4xl hidden sm:block tracking-tight">
                 back2<span className="text-red-500">blazers</span>

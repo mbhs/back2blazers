@@ -1,12 +1,24 @@
 "use client";
 
 import mapboxgl from 'mapbox-gl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as motion from 'motion/react-client'
+import { LayerType } from '@/lib/types';
 
 export function Map(){
+  const [layers, setLayers] = useState<LayerType[]>()
   const mapRef = useRef<mapboxgl.Map | null>(null);
+  
+  useEffect(() => {
+    fetch(`/api/datasets`)
+      .then(r => r.json())
+      .then(r => setLayers(r))
+  }, [])
+
+  useEffect(()=> {
+    console.log(layers)
+  })
 
   useEffect(() => {
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS;
@@ -27,8 +39,7 @@ export function Map(){
       mapRef.current?.setFog({})
       mapRef.current?.flyTo({ center: [-77.01172, 39.01809], zoom: 18, speed: 0.5})
     })
-
-  })
+  }, [])
 
   return (
     <>
