@@ -1,4 +1,3 @@
-import { LayerType } from '@/lib/types'
 export const runtime = 'edge'
 
 async function getLayers() {
@@ -11,23 +10,30 @@ async function fetchLayers(){
     `https://api.mapbox.com/datasets/v1/${process.env.MAPBOX_USER}?access_token=${process.env.MAPBOX_DATASET_ACCESS}`
   )
     .then(res => res.json())
-    .then(async res => await Promise.all(
-      res.map(
-        async ({id, name} : {id:string, name:string}) => {
-          return {
-            name,
-            data:
-              await fetch(
-               `https://api.mapbox.com/datasets/v1/${process.env.MAPBOX_USER}/${id}/features?access_token=${process.env.MAPBOX_DATASET_ACCESS}`
-              ).then(res => res.json())
-          }
-        }
+    .then(res => 
+      res.sort(
+        (a: {id: string, name:string}, b: {id: string, name:string}) => 
+          a.name.localeCompare(b.name)
       )
     )
-  )
+    .then(async res =>
+      await Promise.all(
+        res.map(
+          async ({id, name} : {id:string, name:string}) => {
+            return {
+              name,
+              data:
+                await fetch(
+                  `https://api.mapbox.com/datasets/v1/${process.env.MAPBOX_USER}/${id}/features?access_token=${process.env.MAPBOX_DATASET_ACCESS}`
+                ).then(res => res.json())
+            }
+          }
+        )
+      )
+    )
 }
 
 export async function GET() {
-  const layers : LayerType[] = await getLayers()
+  const layers = await getLayers()
   return Response.json(layers)
 }
