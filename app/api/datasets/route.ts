@@ -1,10 +1,7 @@
 import { LayerType } from '@/lib/types'
-// import { cacheTag } from 'next/cache'
- 
+export const runtime = 'edge'
+
 async function getLayers() {
-  // 'use cache'
-  // cacheTag('layers')
- 
   const layers = await fetchLayers()
   return layers
 }
