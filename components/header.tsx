@@ -1,4 +1,5 @@
 "use client"
+{/* eslint-disable @next/next/no-img-element */}
 
 import * as motion from "motion/react-client"
 import Link from "next/link";
@@ -15,18 +16,18 @@ export function Header(){
       >
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
-            <Link href="/" aria-label="Home Button" className="hover:opacity-80 transition-opacity flex items-center gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/blazer.png" alt="Logo" className="max-w-14 py-2"/>
-              <p className="font-semibold text-4xl hidden sm:block tracking-tight">
+            <Link 
+              href="/" 
+              aria-label="Home Button" 
+              className="hover:opacity-80 transition-opacity flex items-center gap-3"
+            >
+              <img src="/blazer.png" alt="Logo" className="max-w-12 sm:max-w-14 sm:py-2"/>
+              <p className="font-semibold sm:text-4xl text-3xl tracking-tight">
                 back2<span className="text-red-500">blazers</span>
               </p>
             </Link>
-            <div className="sm:hidden">
-              <ThemeToggle/>
-            </div>
           </div>
-          <p className="hidden sm:block italic tracking-tighter opacity-70">
+          <p className="italic tracking-tight sm:tracking-tighter opacity-70 text-sm">
             finding and bringing back lost items for blazer students! <br/>
             @ Montgomery Blair High School
           </p>
@@ -37,7 +38,7 @@ export function Header(){
         </div>
       </motion.div>
       <motion.div 
-        className="hidden sm:block absolute top-5 left-[425px] z-10000"
+        className="absolute top-36.5 right-2.5 sm:block sm:top-5 sm:left-[425px] z-10000"
         initial={{ x: -25, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 2.5}}

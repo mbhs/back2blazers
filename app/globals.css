@@ -122,11 +122,11 @@
 }
 
 .box {
-  @apply dark:bg-neutral-900/70 bg-neutral-100/70 shadow-neutral-400 shadow-lg dark:shadow-neutral-800 border-neutral-300 dark:border-neutral-700
+  @apply dark:bg-neutral-900/70 bg-neutral-100/70 shadow-neutral-400 sm:shadow-lg dark:shadow-neutral-800 border-neutral-300 dark:border-neutral-700
 }
 
 .button {
-  @apply dark:hover:bg-neutral-700/70 hover:bg-neutral-200/70 dark:bg-neutral-900/70 bg-neutral-100/70 shadow-neutral-400 shadow-lg dark:shadow-neutral-800 border-neutral-300 dark:border-neutral-700
+  @apply dark:hover:bg-neutral-700/70 hover:bg-neutral-100/70 dark:bg-neutral-900/70 bg-neutral-100/70 shadow-neutral-400 sm:shadow-lg dark:shadow-neutral-800 border-neutral-300 dark:border-neutral-700
 }
 
 ::selection {
