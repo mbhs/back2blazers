@@ -1,11 +1,51 @@
 "use client";
 
 import mapboxgl from 'mapbox-gl';
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { LayerType } from '@/lib/types';
 import RecenterButton from './recenter-button';
 
+interface LayerFunctionProps {
+  mapRef: RefObject<mapboxgl.Map | null>,
+  layer: LayerType
+}
+
+function addSource({mapRef, layer} : LayerFunctionProps){
+  mapRef.current?.addSource(layer.name, {
+    type: "geojson",
+    data: layer.data
+  }) 
+}
+function addFill({mapRef, layer}: LayerFunctionProps){
+  mapRef.current?.addLayer({
+    id: `${layer.name}-fill`,
+    type: 'fill',
+    source: layer.name,
+    paint: {
+      "fill-color": ["get", "fill"],
+      "fill-opacity": 0.5
+    }
+  })
+}
+
+function addSymbol({mapRef, layer} : LayerFunctionProps){
+  mapRef.current?.addLayer({
+    id: `${layer.name}-symbol`,
+    type: 'symbol',
+    source: layer.name,
+    layout: {
+      "text-field": ["get", "room"],
+      "text-font": ["Open Sans Bold"],
+      "text-size": 14,
+    },
+    paint: {
+      "text-color": "#111",
+      "text-halo-color": "#fff",
+      "text-halo-width": 1,
+    }
+  })
+}
 
 export function Map(){
   const [layers, setLayers] = useState<LayerType[]>()
@@ -13,31 +53,11 @@ export function Map(){
 
   useEffect(()=> {
     if (!layers) return
-    for (let i: number = 0; i < layers.length; i++){
-      mapRef.current?.addSource(layers[i].name, {
-        type: "geojson",
-        data: layers[i].data
-      })
-      mapRef.current?.addLayer({
-        id: layers[i].name,
-        type: 'fill',
-        source: layers[i].name,
-        layout: {
-          "text-field": ["get", "room"],
-          "text-font": ["Open Sans Bold"],
-          "text-size": 14,
-          "text-offset": [0, 1.5],
-          "text-anchor": "bottom",   
-        },
-        paint: {
-          "text-color": "#111",
-          "text-halo-color": "#fff",
-          "text-halo-width": 1,
-          "fill-color": ["get", "fill"],
-          "fill-opacity": 0.5
-        }
-      })
-    }
+    layers.forEach((layer) => {      
+      addSource({mapRef, layer})
+      addFill({mapRef, layer})
+      addSymbol({mapRef, layer})
+    })
   }, [layers])
 
   useEffect(() => {
@@ -58,11 +78,10 @@ export function Map(){
     mapRef.current.on('style.load', () => {
       mapRef.current?.setFog({})
       mapRef.current?.flyTo({ center: [-77.01150, 39.01800], zoom: 18, speed: 0.5, pitch:0, bearing:180})
+      fetch(`/api/datasets`)
+        .then(r => r.json())
+        .then(r => setLayers(r))
     })
-
-    fetch(`/api/datasets`)
-      .then(r => r.json())
-      .then(r => setLayers(r))
   }, [])
 
   return (

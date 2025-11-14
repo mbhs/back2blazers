@@ -5,7 +5,7 @@ import { RefObject } from 'react';
 import * as motion from 'motion/react-client'
 import { FaMapPin } from 'react-icons/fa6';
 
-type RecenterButtonProps = {
+interface RecenterButtonProps {
   mapRef: RefObject<mapboxgl.Map | null>
 }
 
