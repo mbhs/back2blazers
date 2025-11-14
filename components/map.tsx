@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { LayerType } from '@/lib/types';
 import RecenterButton from './recenter-button';
-import { addFill, addSource, addSymbol } from '@/lib/utils';
+import { addSource, addLayer } from '@/lib/utils';
+import FloorSelect from './floor-select';
 
 export function Map(){
   const [layers, setLayers] = useState<LayerType[]>()
@@ -16,8 +17,11 @@ export function Map(){
     if (!layers) return
     layers.forEach((layer) => {      
       addSource({mapRef, layer})
-      addFill({mapRef, layer})
-      addSymbol({mapRef, layer})
+      addLayer({mapRef, layer})
+      if (layer.name !== "Floor One"){
+        mapRef.current?.setLayoutProperty(`${layer.name}-fill`, 'visibility', 'none')
+        mapRef.current?.setLayoutProperty(`${layer.name}-symbol`, 'visibility', 'none')
+      }
     })
   }, [layers])
 
@@ -28,7 +32,8 @@ export function Map(){
       style: 'mapbox://styles/mapbox/standard?optimize=true',
       projection: 'globe',
       zoom: 13,
-      center: [-77.01150, 39.01800],
+      center: [-77.02150, 39.01800],
+      bearing: 90,
       config: {
         basemap: {
           show3dObjects: false
@@ -52,9 +57,10 @@ export function Map(){
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 1}}
-        className="absolute bottom-0 left-0 right-0 z-10000 w-fit mx-auto px-5 max-w-full overflow-hidden" 
+        className="absolute bottom-0 left-0 sm:right-0 z-10000 sm:w-fit mx-auto px-5 max-w-full overflow-hidden flex flex-row gap-2" 
       >
         <RecenterButton mapRef={mapRef} />
+        <FloorSelect mapRef={mapRef} layers={layers} />
       </motion.div>
     </>
   )
