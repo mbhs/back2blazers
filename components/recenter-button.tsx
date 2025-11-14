@@ -1,5 +1,3 @@
-"use client";
-
 import { MapComponentProps } from '@/lib/types';
 import { FaMapPin } from 'react-icons/fa6';
 
