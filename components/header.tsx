@@ -32,13 +32,10 @@ export function Header(){
             @ Montgomery Blair High School
           </p>
         </div>
-        <hr className="mt-3"/>
-        <div className="flex flex-row justify-between w-full items-center tracking-tighter mt-3 gap-6">
-
-        </div>
+        {/* <hr className="mt-3"/> */}
       </motion.div>
       <motion.div 
-        className="absolute top-36.5 right-2.5 sm:block sm:top-5 sm:left-[425px] z-10000"
+        className="absolute top-32.5 right-5 sm:block sm:top-5 sm:left-[425px] z-10000"
         initial={{ x: -25, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 2.5}}

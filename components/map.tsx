@@ -1,51 +1,12 @@
 "use client";
 
+import * as motion from 'motion/react-client'
 import mapboxgl from 'mapbox-gl';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { LayerType } from '@/lib/types';
 import RecenterButton from './recenter-button';
-
-interface LayerFunctionProps {
-  mapRef: RefObject<mapboxgl.Map | null>,
-  layer: LayerType
-}
-
-function addSource({mapRef, layer} : LayerFunctionProps){
-  mapRef.current?.addSource(layer.name, {
-    type: "geojson",
-    data: layer.data
-  }) 
-}
-function addFill({mapRef, layer}: LayerFunctionProps){
-  mapRef.current?.addLayer({
-    id: `${layer.name}-fill`,
-    type: 'fill',
-    source: layer.name,
-    paint: {
-      "fill-color": ["get", "fill"],
-      "fill-opacity": 0.5
-    }
-  })
-}
-
-function addSymbol({mapRef, layer} : LayerFunctionProps){
-  mapRef.current?.addLayer({
-    id: `${layer.name}-symbol`,
-    type: 'symbol',
-    source: layer.name,
-    layout: {
-      "text-field": ["get", "room"],
-      "text-font": ["Open Sans Bold"],
-      "text-size": 14,
-    },
-    paint: {
-      "text-color": "#111",
-      "text-halo-color": "#fff",
-      "text-halo-width": 1,
-    }
-  })
-}
+import { addFill, addSource, addSymbol } from '@/lib/utils';
 
 export function Map(){
   const [layers, setLayers] = useState<LayerType[]>()
@@ -87,7 +48,14 @@ export function Map(){
   return (
     <>
       <div id="map" className="w-full h-full"/>
-      <RecenterButton mapRef={mapRef} />
+      <motion.div 
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 1}}
+        className="absolute bottom-0 left-0 right-0 z-10000 w-fit mx-auto px-5 max-w-full overflow-hidden" 
+      >
+        <RecenterButton mapRef={mapRef} />
+      </motion.div>
     </>
   )
 }
