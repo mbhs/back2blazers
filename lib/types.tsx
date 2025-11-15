@@ -14,3 +14,11 @@ export interface LayerFunctionProps {
   mapRef: RefObject<mapboxgl.Map | null>,
   layer: LayerType
 }
+
+export interface FoundItem {
+  approved: boolean;
+  claimed: boolean;
+  image_url: string;
+  location: string;
+  description: string;
+}

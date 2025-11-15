@@ -6,7 +6,7 @@ export default function InquiryToggle(){
   return (
     <Dialog>
       <DialogTrigger
-        className="start px-4 py-1.5 sm:px-5 rounded-full backdrop-blur-lg border text-center cursor-pointer text-white w-full sm:w-auto italic"
+        className="start shadow-red-700 sm:shadow-md px-4 py-1.5 sm:px-5 rounded-full backdrop-blur-lg border text-center cursor-pointer text-white w-full sm:w-auto italic"
       >
           Found/Lost an item? Click here!
       </DialogTrigger>

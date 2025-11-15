@@ -130,7 +130,7 @@
 }
 
 .start {
-  @apply hover:bg-red-600/70 bg-red-700/70 shadow-red-700 sm:shadow-md border-red-700
+  @apply hover:bg-red-600/70 bg-red-700/70 border-red-700
 }
 
 ::selection {

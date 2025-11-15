@@ -4,18 +4,20 @@ import { IoSearch, IoShirtOutline } from "react-icons/io5";
 import { BsPatchQuestion } from "react-icons/bs";
 import SearchView from "../views/search-view";
 import UploadView from "../views/upload-view";
-import StaffView from "../views/staff-view";
+import LoginView from "../views/login-view";
 import QuestionView from "../views/question-view";
 
 export default function InquiryAccordion(){
   return (
     <Accordion
-      type="multiple"
+      type="single"
       className="w-full"
+      collapsible
     >
       <AccordionItem value="item-1">
         <AccordionTrigger
           aria-label="Search Found Items Section"
+          className="cursor-pointer px-4"
         >
           <div className="flex flex-row items-center gap-2">
             <IoSearch size={18}/>
@@ -28,11 +30,12 @@ export default function InquiryAccordion(){
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger
-          aria-label="Upload Found Items Section"
+          aria-label="Report Found Items Section"
+          className="cursor-pointer px-4"
         >
           <div className="flex flex-row items-center gap-2">
             <IoShirtOutline size={18} />
-            Upload Found Items
+            Report Found Items
           </div>
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
@@ -42,6 +45,7 @@ export default function InquiryAccordion(){
       <AccordionItem value="item-3">
         <AccordionTrigger
           aria-label="Administer View Section"
+          className="cursor-pointer px-4"
         >
           <div className="flex flex-row gap-2 items-center">
             <HiOutlineDocumentCheck size={18}/>
@@ -49,12 +53,13 @@ export default function InquiryAccordion(){
           </div>
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
-          <StaffView/>
+          <LoginView/>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-4">
         <AccordionTrigger
           aria-label="Questions and Contact Section"
+          className="cursor-pointer px-4"
         >
           <div className="flex flex-row items-center gap-2">
             <BsPatchQuestion size={18}/>
