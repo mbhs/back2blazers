@@ -74,27 +74,27 @@ export default function StaffView(){
         <TableBody className="text-xs font-normal">
             {items?.map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="max-w-[70px] whitespace-normal wrap-break-word">
+                <TableCell className="max-w-[150px] whitespace-normal wrap-break-word">
                   <div className="flex flex-row gap-2 items-center ">
                     {
                       !item.approved &&
-                      <Button className="cursor-pointer start text-white" onClick={() => handleApprove(item.id)}>
+                      <Button type="button" className="cursor-pointer start text-white" onClick={() => handleApprove(item.id)}>
                         <FaRegCircleCheck />
                       </Button>
                     }
                     {
                       item.claimed &&
-                      <Button className="cursor-pointer start text-white" onClick={() => handleClaim(item.id)}>
+                      <Button type="button" className="cursor-pointer start text-white" onClick={() => handleClaim(item.id)}>
                         <FaHandsHelping />
                       </Button>
                     }
-                    <Button className="cursor-pointer start text-white" onClick={() => handleDelete(item.id)}>
+                    <Button type="button" className="cursor-pointer start text-white" onClick={() => handleDelete(item.id)}>
                       <FaRegTrashCan />
                     </Button>
                   </div>
                 </TableCell>
-                <TableCell className="max-w-[60px] whitespace-normal wrap-break-word text-right">{item.location}</TableCell>
-                <TableCell className="max-w-[100px] whitespace-normal wrap-break-word">{item.description}</TableCell>
+                <TableCell className="max-w-[150px] whitespace-normal wrap-break-word text-right">{item.location}</TableCell>
+                <TableCell className="max-w-[150px] whitespace-normal wrap-break-word">{item.description}</TableCell>
                 <TableCell className="max-w-[150px] whitespace-normal wrap-break-word">
                   { item.image_url &&
                     <img src={item.image_url}/>

@@ -19,9 +19,7 @@ export default function InquiryToggle(){
               MBHS Lost & Found Inquiries
           </DialogTitle> 
         </DialogHeader>
-        <DialogContent className="box backdrop-blur-xl">
-          <InquiryAccordion/>
-        </DialogContent>
+        <InquiryAccordion/>
       </DialogContent>
     </Dialog>
   )

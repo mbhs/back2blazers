@@ -16,6 +16,7 @@ export default function UploadView() {
   });
 
   const [image, setImage] = useState<File | null>(null);
+  const [fileInputKey, setFileInputKey] = useState<number>(0);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -56,12 +57,24 @@ export default function UploadView() {
       .select()
       .single()
 
+    setUpload({
+      approved: false,
+      claimed: false,
+      image_url: "",
+      location: "",
+      description: "",
+    })
+
     if (error) {
       toast.error("Error reporting found item. Please try again.")
       return;
     }
 
     toast.success("Found item reported! Pending staff approval for public viewing.")
+
+    // clear the selected file input by remounting the input (change key)
+    setImage(null);
+    setFileInputKey((k) => k + 1);
   }
   
   return (
@@ -71,17 +84,20 @@ export default function UploadView() {
         onSubmit={handleSubmit}
       >
         <Input
+          key={fileInputKey}
           type="file"
           accept="image/*"
           className="hover:cursor-pointer"
           onChange={handleFileChange}
         />
         <Textarea
+          value={upload.location}
           placeholder="Where is the item located? (Where can someone pick it up?)"
           className="hover:cursor-text"
           onChange = {(e) => setUpload({...upload, location: e.target.value})}
         />
         <Textarea
+          value={upload.description}
           placeholder="Describe the item (color, size, brand, distinguishing features, etc.)"
           className="hover:cursor-text"
           onChange = {(e) => setUpload({...upload, description: e.target.value})}
