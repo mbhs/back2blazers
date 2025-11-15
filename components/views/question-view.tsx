@@ -1,15 +1,12 @@
 export default function QuestionView() {
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <p>
-        Our flagship product combines cutting-edge technology with sleek
-        design. Built with premium materials, it offers unparalleled
-        performance and reliability.
+        Back2Blazers is a project built by Daniel Hoang, a lead developer in the Montgomery Blair High School Systems Operations team (Blair SysOps). 
       </p>
       <p>
-        Key features include advanced processing capabilities, and an
-        intuitive user interface designed for both beginners and experts.
+        If there are any questions, concerns, or feedback, please reach out to <span className="italic">blairsysops@gmail.com.</span>
       </p>
-    </>
+    </div>
   )
 }

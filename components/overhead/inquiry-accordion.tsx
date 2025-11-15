@@ -61,7 +61,7 @@ export default function InquiryAccordion(){
             Questions and Contact
           </div>
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-balance">
+        <AccordionContent className="flex flex-col gap-4">
           <QuestionView/>
         </AccordionContent>
       </AccordionItem>
