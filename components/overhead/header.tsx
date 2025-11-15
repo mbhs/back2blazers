@@ -3,7 +3,7 @@
 
 import * as motion from "motion/react-client"
 import Link from "next/link";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "../ui/theme-toggle";
 import InquiryToggle from "./inquiry-toggle";
 
 export function Header(){

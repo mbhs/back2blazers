@@ -1,5 +1,5 @@
-import { Header } from "@/components/header";
-import { Map } from "@/components/map";
+import { Header } from "@/components/overhead/header";
+import { Map } from "@/components/map/map";
 
 export default function Home() {
   return (
