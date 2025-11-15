@@ -1,5 +1,5 @@
 import { MapComponentProps } from '@/lib/types';
-import { FaMapPin } from 'react-icons/fa6';
+import { PiMapPinAreaFill } from 'react-icons/pi';
 
 export default function RecenterButton({ mapRef }: MapComponentProps){
   return (
@@ -11,7 +11,7 @@ export default function RecenterButton({ mapRef }: MapComponentProps){
       }}
     >
       <p className="hidden sm:block">Recenter Map</p>
-      <FaMapPin />
+      <PiMapPinAreaFill />
     </button>
   )
 }
