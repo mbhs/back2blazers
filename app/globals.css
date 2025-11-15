@@ -129,6 +129,10 @@
   @apply dark:hover:bg-neutral-700/70 hover:bg-neutral-100/70 dark:bg-neutral-900/70 bg-neutral-100/70 shadow-neutral-400 sm:shadow-lg dark:shadow-neutral-800 border-neutral-300 dark:border-neutral-700
 }
 
+.start {
+  @apply hover:bg-red-600/70 bg-red-700/70 shadow-red-700 sm:shadow-md border-red-700
+}
+
 ::selection {
   background: red;
   color:white;

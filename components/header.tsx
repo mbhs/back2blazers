@@ -4,6 +4,7 @@
 import * as motion from "motion/react-client"
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
+import InquiryToggle from "./inquiry-toggle";
 
 export function Header(){
   return(
@@ -35,22 +36,23 @@ export function Header(){
         {/* <hr className="mt-3"/> */}
       </motion.div>
       <div 
-        className="absolute top-33 sm:block sm:top-5 sm:left-[405px] z-10000 w- px-5"
+        className="absolute top-33 sm:block sm:top-5 sm:left-[410px] z-10000 w- px-5"
       >
-        <div className="sm:w-[calc(100vw-430px)] w-[calc(100vw-40px)] flex justify-between">
+        <div className="sm:w-[calc(100vw-440px)] w-[calc(100vw-40px)] flex justify-between sm:justify-start gap-2">
           <motion.div
             initial={{ x: -25, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 2.5}}
+            className="w-full sm:w-auto"
           >
-            <ThemeToggle/>
+            <InquiryToggle/>
           </motion.div>
           <motion.div
             initial={{ x: 25, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 2.9}}
+            transition={{ duration: 0.5, delay: 2.5}}
           >
-            
+            <ThemeToggle/>
           </motion.div>
         </div>
       </div>

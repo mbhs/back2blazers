@@ -18,7 +18,7 @@ export function Map(){
     layers.forEach((layer) => {      
       addSource({mapRef, layer})
       addLayer({mapRef, layer})
-      if (layer.name !== "Floor One"){
+      if (!layer.name.toLocaleLowerCase().includes("floor one")){
         mapRef.current?.setLayoutProperty(`${layer.name}-fill`, 'visibility', 'none')
         mapRef.current?.setLayoutProperty(`${layer.name}-symbol`, 'visibility', 'none')
       }
@@ -52,7 +52,6 @@ export function Map(){
 
   return (
     <>
-      <div id="map" className="w-full h-full"/>
       <motion.div 
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -62,6 +61,7 @@ export function Map(){
         <RecenterButton mapRef={mapRef} />
         <FloorSelect mapRef={mapRef} layers={layers} />
       </motion.div>
+      <div id="map" className="w-full h-full"/>
     </>
   )
 }
