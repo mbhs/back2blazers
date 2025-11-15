@@ -1,10 +1,23 @@
 import { supabase } from "@/lib/supabase-client"
-import { FoundItem } from "@/lib/types"
+import { PendingItems } from "@/lib/types"
 import { useEffect, useState } from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
+import { Button } from "../ui/button"
+import { FaHandsHelping } from "react-icons/fa";
+import { toast } from "sonner"
 
 export default function SearchView() {
-  const [items, setItems] = useState<FoundItem[]>()
+  const [items, setItems] = useState<PendingItems[]>()
+
+  const handleClaim = async (id: number) => {
+    const {error} = await supabase.from("found-items").update({claimed: 'true'}).eq('id', id)
+
+    if (error) {
+      toast("Error claiming item. Please try again")
+      return;
+    }
+    toast("Successful item claim.")
+  }
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -33,6 +46,7 @@ export default function SearchView() {
     >
       <TableHeader>
         <TableRow>
+          <TableHead>Claim</TableHead>
           <TableHead>Location</TableHead>
           <TableHead>Description</TableHead>
           <TableHead>Image</TableHead>
@@ -41,9 +55,21 @@ export default function SearchView() {
       <TableBody>
           {items?.map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="max-w-[100px] whitespace-normal wrap-break-word">{item.location}</TableCell>
-                <TableCell className="max-w-[150px] whitespace-normal wrap-break-word">{item.description}</TableCell>
-                <TableCell className="max-w-[100px] whitespace-normal wrap-break-word">{item.image_url}</TableCell>
+                <TableCell className="max-w-[50px] whitespace-normal wrap-break-word">
+                  <Button className="cursor-pointer start text-white" onClick={()=> handleClaim(item.id)}>
+                    <FaHandsHelping />
+                  </Button>
+                </TableCell>
+                <TableCell className="max-w-[50px] whitespace-normal wrap-break-word text-right">{item.location}</TableCell>
+                <TableCell className="max-w-[100px] whitespace-normal wrap-break-word">{item.description}</TableCell>
+                <TableCell className="max-w-[150px] whitespace-normal wrap-break-word">
+                  { item.image_url &&
+                    <img src={item.image_url}/>
+                  }
+                  { !item.image_url &&
+                    <p>N/A</p>
+                  }
+                </TableCell>
               </TableRow>
             ))
           }

@@ -22,3 +22,7 @@ export interface FoundItem {
   location: string;
   description: string;
 }
+
+export interface PendingItems extends FoundItem {
+  id: number;
+} 

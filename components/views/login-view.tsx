@@ -28,7 +28,6 @@ export default function LoginView() {
       password: login.password,
     })
     if (error) {
-      console.error("Error logging in:", error.message)
       toast.error("Login failed. Please check your credentials and try again.")
       return;
     }
@@ -39,7 +38,7 @@ export default function LoginView() {
   const handleLogout = async () => {
     const {error} = await supabase.auth.signOut()
     if (error) {
-      console.error("Error logging out:", error.message)
+      toast.error("Error logging out. Please try again.")
       return;
     }
     toast.success("Successfully logged out. Re-open this view.")
@@ -60,7 +59,7 @@ export default function LoginView() {
         <div className="flex flex-col gap-4 py-4">
           <div className="flex w-full justify-between">
             <p>Welcome, staff member! You are logged in. View pending posts below.</p>
-            <Button type="submit" className="self-start start text-white" onClick={handleLogout}>
+            <Button type="submit" className="self-start start text-white cursor-pointer" onClick={handleLogout}>
               Log Out
             </Button>
           </div>
@@ -84,7 +83,7 @@ export default function LoginView() {
               placeholder="Password..."
               onChange = {(e) => setLogin({...login, password: e.target.value})}
             />
-            <Button type="submit" className="self-start start text-white">
+            <Button type="submit" className="self-start start text-white cursor-pointer">
               Log In
             </Button>
           </form>
