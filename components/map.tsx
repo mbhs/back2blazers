@@ -56,7 +56,7 @@ export function Map(){
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 1}}
-        className="absolute bottom-0 left-0 sm:right-0 z-10000 sm:w-fit mx-auto px-5 max-w-full overflow-hidden flex flex-row gap-2" 
+        className="absolute bottom-0 left-0 sm:right-0 z-1 sm:w-fit mx-auto px-5 max-w-full overflow-hidden flex flex-row gap-2" 
       >
         <RecenterButton mapRef={mapRef} />
         <FloorSelect mapRef={mapRef} layers={layers} />

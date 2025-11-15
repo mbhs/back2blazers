@@ -10,7 +10,7 @@ export function Header(){
   return(
     <>
       <motion.div   
-        className="box backdrop-blur-lg sm:rounded-lg absolute top-0 left-0 sm:top-5 sm:left-5 px-4 sm:pt-1.5 pt-3 pb-3 border-b sm-border w-full sm:w-[400px] z-10000"
+        className="box backdrop-blur-lg sm:rounded-lg absolute top-0 left-0 sm:top-5 sm:left-5 px-4 sm:pt-1.5 pt-3 pb-3 border-b sm-border w-full sm:w-[400px]"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 2}}
@@ -36,7 +36,7 @@ export function Header(){
         {/* <hr className="mt-3"/> */}
       </motion.div>
       <div 
-        className="absolute top-33 sm:block sm:top-5 sm:left-[410px] z-10000 w- px-5"
+        className="absolute top-33 sm:block sm:top-5 sm:left-[410px] px-5"
       >
         <div className="sm:w-[calc(100vw-440px)] w-[calc(100vw-40px)] flex justify-between sm:justify-start gap-2">
           <motion.div
